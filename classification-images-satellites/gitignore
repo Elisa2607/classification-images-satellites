@@ -1,0 +1,23 @@
+# Modèles volumineux
+*.h5
+*.hdf5
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.ipynb_checkpoints/
+
+# Environnements virtuels
+venv/
+env/
+.venv/
+
+# Données
+output/
+AID/
+
+# Divers OS / IDE
+.DS_Store
+.vscode/
+.idea/

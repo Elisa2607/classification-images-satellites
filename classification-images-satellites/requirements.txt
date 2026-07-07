@@ -1,0 +1,10 @@
+tensorflow>=2.5.0
+keras
+numpy
+matplotlib
+opencv-python
+Pillow
+scikit-learn
+seaborn
+streamlit
+split-folders
