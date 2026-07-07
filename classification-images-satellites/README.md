@@ -1,22 +1,22 @@
-# Classification des images spatiales
+# Satellite Image Classification
 
-Projet de bureau d'étude (BE) visant à classer des images satellites de très haute résolution (600×600 px, RGB) en 30 classes distinctes, à l'aide de réseaux de neurones convolutifs et du transfer learning (VGG16).
+Study project (BE) aiming to classify very high resolution satellite images (600×600 px, RGB) into 30 distinct classes, using convolutional neural networks and transfer learning (VGG16).
 
-## Auteurs
+## Authors
 ALEGRE, VALVERDE, MENZOU
 
-## Contexte
+## Context
 
-La base de données contient des images spatiales réparties en 30 classes (aéroport, terrain vague, plage, pont, zone résidentielle, forêt, stade, etc.). L'objectif est de trouver le modèle optimal permettant de classer correctement une image dans l'une de ces 30 catégories.
+The dataset contains satellite images spread across 30 classes (airport, bare land, beach, bridge, residential area, forest, stadium, etc.). The goal is to find the optimal model to correctly classify an image into one of these 30 categories.
 
-Le projet couvre les étapes suivantes :
-1. **Préparation des données** — répartition train/val/test (80/10/10)
-2. **Modélisation** — d'un premier CNN maison (~80% accuracy) à un modèle VGG16 pré-entraîné avec freezing et data augmentation (~90% accuracy)
-3. **Visualisation** — inspection des filtres et des cartes de caractéristiques des couches convolutives
-4. **Analyse des résultats** — matrice de confusion, rapport de classification
-5. **Déploiement** — une API de classification via Streamlit
+The project covers the following steps:
+1. **Data preparation** — train/val/test split (80/10/10)
+2. **Modeling** — from a first custom CNN (~80% accuracy) to a pre-trained VGG16 model with freezing and data augmentation (~90% accuracy)
+3. **Visualization** — inspection of the filters and feature maps of the convolutional layers
+4. **Results analysis** — confusion matrix, classification report
+5. **Deployment** — a classification API via Streamlit
 
-## Structure du dépôt
+## Repository structure
 
 ```
 .
@@ -24,69 +24,67 @@ Le projet couvre les étapes suivantes :
 ├── requirements.txt
 ├── .gitignore
 ├── notebooks/
-│   └── Rapport_BE_ALEGRE_VALVERDE_MENZOU_final.ipynb   # rapport complet, analyse et résultats
+│   └── Rapport_BE_ALEGRE_VALVERDE_MENZOU_final.ipynb   # full report, analysis and results
 ├── src/
-│   ├── BE_pretraitement.py   # découpage du dataset en train/val/test
-│   ├── BE_lecture.py         # génération des batchs d'images (premier essai, 600x600)
-│   ├── BE_model.py           # construction, entraînement et évaluation du modèle VGG16
-│   └── visu_car.py           # visualisation des filtres, cartes de caractéristiques, analyse des résultats
+│   ├── BE_pretraitement.py   # dataset split into train/val/test
+│   ├── BE_lecture.py         # image batch generation (first attempt, 600x600)
+│   ├── BE_model.py           # VGG16 model building, training and evaluation
+│   └── visu_car.py           # filter visualization, feature maps, results analysis
 ├── app/
-│   └── streamlit_sat.py      # API de classification (Streamlit)
+│   └── streamlit_sat.py      # classification API (Streamlit)
 └── models/
-    ├── model.json            # architecture du modèle final
-    └── best_model.h5         # poids du modèle (non inclus, voir ci-dessous)
+    ├── model.json            # final model architecture
+    └── best_model.h5         # model weights (not included, see below)
 ```
 
-## Modèle pré-entraîné
+## Pre-trained model
 
-Le fichier `best_model.h5` (~60 Mo) n'est pas versionné dans ce dépôt. Vous pouvez le télécharger ici :
+The `best_model.h5` file (~60 MB) is not versioned in this repository. You can download it here:
 
-👉 [Lien de téléchargement](https://filesender.renater.fr/?s=download&token=f21fd843-7bc1-4c95-8d04-641eda4cb941)
+- [Download link](https://filesender.renater.fr/?s=download&token=f21fd843-7bc1-4c95-8d04-641eda4cb941)
 
-Placez-le dans le dossier `models/` avant de lancer l'API ou le script de visualisation.
-
-> ⚠️ Ce lien peut expirer. Pour une solution pérenne, envisagez [Git LFS](https://git-lfs.github.com/) ou un stockage type Google Drive / Hugging Face Hub.
+Place it in the `models/` folder before running the API or the visualization script.
 
 ## Installation
 
 ```bash
-git clone <url-du-depot>
-cd <nom-du-depot>
+git clone <repo-url>
+cd <repo-name>
 pip install -r requirements.txt
 ```
 
-## Utilisation
+## Usage
 
-### 1. Prétraitement des données
+### 1. Data preprocessing
 ```bash
 python src/BE_pretraitement.py
 ```
 
-### 2. Entraînement du modèle
+### 2. Model training
 ```bash
 python src/BE_model.py
 ```
 
-### 3. Visualisation des filtres et analyse des résultats
+### 3. Filter visualization and results analysis
 ```bash
 python src/visu_car.py
 ```
 
-### 4. Lancer l'API de classification
+### 4. Launch the classification API
 ```bash
 streamlit run app/streamlit_sat.py
 ```
 
-## Résultats
+## Results
 
-- Modèle CNN maison : ~80% d'accuracy
-- Modèle VGG16 (freezing + data augmentation) : ~90% d'accuracy
-- Classes les mieux classées : *Viaduc*
-- Classes les moins bien classées : *School*
+- Custom CNN model: ~80% accuracy
+- VGG16 model (freezing + data augmentation): ~90% accuracy
+- Best classified classes: *Viaduct*
+- Worst classified classes: *School*
 
-Pour le détail complet de la démarche, des choix méthodologiques et des visualisations, voir le notebook dans `notebooks/`.
+For the full methodology, design choices, and visualizations, see the notebook in `notebooks/`.
 
-## Dépendances principales
+## Main dependencies
 
 - TensorFlow / Keras
 - Streamlit
@@ -95,4 +93,4 @@ Pour le détail complet de la démarche, des choix méthodologiques et des visua
 - seaborn / matplotlib
 - split-folders
 
-Voir `requirements.txt` pour la liste complète.
+See `requirements.txt` for the full list.
